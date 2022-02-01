@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    zp-r710-1:
+      ansible_host: 10.100.2.1
+    zp-r620-1:
+      ansible_host: 10.100.2.2

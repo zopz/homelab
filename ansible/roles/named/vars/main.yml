@@ -1,0 +1,45 @@
+---
+bind_acls:
+  - name: trusted
+    match_list:
+      - 127.0.0.1
+      - 10.100.0.0/16
+bind_allow_query:
+  - trusted
+bind_forwarders:
+  - 98.32.196.52
+bind_listen_ipv4:
+  - 127.0.0.1
+  - 10.100.1.0
+bind_recursion: true
+bind_zone_domains:
+  - name: k8s.zops.me
+    networks:
+      - '10.100.0'
+    name_servers:
+      - 10.100.1.0
+    hostmaster_email: admin
+    hosts:
+      - name: ns1
+        ip: 10.100.1.0
+      - name: ns2
+        ip: 1.1.1.1
+      - name: gateway1
+        ip: 10.100.1.0
+      - name: gateway2
+        ip: 10.100.1.0
+      - name: kube-cluster1
+        ip: 10.100.100.10
+      - name: kube-master1
+        ip: 10.100.100.11
+      - name: kube-master2
+        ip: 10.100.100.12
+      - name: kube-master3
+        ip: 10.100.100.13
+      - name: kube-worker1
+        ip: 10.100.100.21
+      - name: kube-worker2
+        ip: 10.100.100.22
+      - name: kube-worker3
+        ip: 10.100.100.23
+bind_zone_master_server_ip: 10.100.1.0

@@ -1,0 +1,7 @@
+collections:
+  - name: community.general
+  - name: ansible.posix
+  - name: ypsman.ipv6_disable
+  - name: bertvv.bind
+  - name: uoi-io.haproxy
+  - name: evrardjp.keepalived

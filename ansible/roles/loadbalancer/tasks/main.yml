@@ -1,0 +1,17 @@
+---
+- name: Include secret vars  
+  include_vars: .ansible_secret.yml
+
+- name: Set up haproxy
+  include_role:
+    name: uoi-io.haproxy
+
+- name: Set up keepalived
+  include_role:
+    name: evrardjp.keepalived
+
+- name: Allow load balancer port in ufw
+  ufw:
+    rule: allow
+    port: "{{ loadbalancer_haproxy_port }}"
+    src: 10.100.0.0/16

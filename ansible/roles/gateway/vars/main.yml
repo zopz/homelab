@@ -1,0 +1,4 @@
+---
+nat_cidr: 10.100.0.0/16
+nat_interface: eth1
+nat_server_ip: 10.100.1.0
