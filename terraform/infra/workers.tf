@@ -6,18 +6,20 @@ resource "random_shuffle" "kube_worker_hosts" {
 resource "proxmox_vm_qemu" "kube_worker" {
   count = var.workers.count
 
-  name        = "worker-${count.index}"
-  target_node = random_shuffle.kube_worker_hosts.result[count.index]
-  agent       = 1
-  clone       = var.common.clone
-  os_type     = "cloud-init"
-  vmid        = "30${count.index}"
-  memory      = var.workers.memory
-  cores       = var.workers.cores
-  ipconfig0   = "ip=${cidrhost(var.common.cidr_public, "10${count.index}")}/16,gw=${var.common.gateway}"
-  ipconfig1   = "ip=${cidrhost(var.common.cidr_private, "10${count.index}")}/16"
-  bootdisk    = "scsi0"
-  scsihw      = "virtio-scsi-pci"
+  name         = "worker-${count.index}"
+  target_node  = random_shuffle.kube_worker_hosts.result[count.index]
+  agent        = 1
+  clone        = var.common.clone
+  os_type      = "cloud-init"
+  vmid         = "30${count.index}"
+  memory       = var.workers.memory
+  cores        = var.workers.cores
+  ipconfig0    = "ip=${cidrhost(var.common.cidr_public, "10${count.index}")}/16,gw=${var.common.gateway}"
+  ipconfig1    = "ip=${cidrhost(var.common.cidr_private, "10${count.index}")}/16"
+  bootdisk     = "scsi0"
+  scsihw       = "virtio-scsi-pci"
+  searchdomain = var.common.search_domain
+  nameserver   = var.common.nameserver
 
   vga {
     type = "qxl"

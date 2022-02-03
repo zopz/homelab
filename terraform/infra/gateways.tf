@@ -1,13 +1,13 @@
 resource "proxmox_lxc" "gateway" {
   count = length(var.hosts)
 
-  ostemplate = "${var.common.lvm_template_dir}/${var.common.lvm_template}.tar.gz"
-  ostype     = var.common.os_type
-  cores      = var.gateways.cores
-  memory     = var.gateways.memory
-
-  hostname = "gateway-${count.index}"
-  vmid     = "10${count.index}"
+  ostemplate   = "${var.common.lvm_template_dir}/${var.common.lvm_template}.tar.gz"
+  ostype       = var.common.os_type
+  cores        = var.gateways.cores
+  memory       = var.gateways.memory
+  hostname     = "gateway-${count.index}"
+  vmid         = "10${count.index}"
+  searchdomain = var.common.search_domain
 
   network {
     name     = var.common.interface_public

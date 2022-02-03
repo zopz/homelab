@@ -1,3 +1,7 @@
+locals {
+  proxmox_url = "https://10.100.2.1:8006/api2/json"
+}
+
 variable "common" {
   type = map(string)
   default = {
@@ -14,6 +18,8 @@ variable "common" {
     cidr_public       = "10.100.100.0/24"
     interface_private = "eth1"
     cidr_private      = "172.30.1.0/24"
+    search_domain     = "k8s-hl.zops.me"
+    nameserver        = "10.100.100.0"
   }
 }
 

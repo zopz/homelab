@@ -8,5 +8,5 @@ resource "local_file" "vm_inventory" {
       }
     }
   )
-  filename = "${path.module}/../../inventories/vm.yaml"
+  filename = "${path.module}/../../inventories/tf.yaml"
 }

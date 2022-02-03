@@ -3,5 +3,6 @@ collections:
   - name: ansible.posix
   - name: ypsman.ipv6_disable
   - name: bertvv.bind
+    version: v4.2.0
   - name: uoi-io.haproxy
   - name: evrardjp.keepalived

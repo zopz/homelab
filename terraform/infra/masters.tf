@@ -6,18 +6,20 @@ resource "random_shuffle" "kube_master_hosts" {
 resource "proxmox_vm_qemu" "kube_master" {
   count = var.masters.count
 
-  name        = "master-${count.index}"
-  target_node = random_shuffle.kube_master_hosts.result[count.index]
-  agent       = 1
-  clone       = var.common.clone
-  os_type     = "cloud-init"
-  vmid        = "20${count.index}"
-  memory      = var.masters.memory
-  cores       = var.masters.cores
-  ipconfig0   = "ip=${cidrhost(var.common.cidr_public, "1${count.index}")}/16,gw=${var.common.gateway}"
-  ipconfig1   = "ip=${cidrhost(var.common.cidr_private, "1${count.index}")}/16"
-  bootdisk    = "scsi0"
-  scsihw      = "virtio-scsi-pci"
+  name         = "master-${count.index}"
+  target_node  = random_shuffle.kube_master_hosts.result[count.index]
+  agent        = 1
+  clone        = var.common.clone
+  os_type      = "cloud-init"
+  vmid         = "20${count.index}"
+  memory       = var.masters.memory
+  cores        = var.masters.cores
+  ipconfig0    = "ip=${cidrhost(var.common.cidr_public, "1${count.index}")}/16,gw=${var.common.gateway}"
+  ipconfig1    = "ip=${cidrhost(var.common.cidr_private, "1${count.index}")}/16"
+  bootdisk     = "scsi0"
+  scsihw       = "virtio-scsi-pci"
+  searchdomain = var.common.search_domain
+  nameserver   = var.common.nameserver
 
   vga {
     type = "qxl"

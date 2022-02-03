@@ -7,27 +7,32 @@ bind_acls:
 bind_allow_query:
   - trusted
 bind_forwarders:
-  - 98.32.196.52
+  - 1.1.1.1
+  - 8.8.8.8
 bind_listen_ipv4:
   - 127.0.0.1
-  - 10.100.1.0
+  - 10.100.100.0
 bind_recursion: true
-bind_zone_domains:
-  - name: k8s.zops.me
+bind_zones:
+  - name: k8s-hl.zops.me
+    create_reverse_zones: false
     networks:
-      - '10.100.0'
+      - '10.100'
+    primaries:
+      - 10.100.100.0
     name_servers:
-      - 10.100.1.0
+      - ns1.k8s-hl.zops.me.
+      - ns2.k8s-hl.zops.me.
     hostmaster_email: admin
     hosts:
       - name: ns1
-        ip: 10.100.1.0
+        ip: 10.100.100.0
       - name: ns2
-        ip: 1.1.1.1
+        ip: 10.100.100.1
       - name: gateway1
-        ip: 10.100.1.0
+        ip: 10.100.100.0
       - name: gateway2
-        ip: 10.100.1.0
+        ip: 10.100.100.1
       - name: kube-cluster1
         ip: 10.100.100.10
       - name: kube-master1
@@ -42,4 +47,3 @@ bind_zone_domains:
         ip: 10.100.100.22
       - name: kube-worker3
         ip: 10.100.100.23
-bind_zone_master_server_ip: 10.100.1.0
